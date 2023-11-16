@@ -26,6 +26,7 @@ export const MENU_AUTH_MGT = "AUTH_MGT";
 export const MENU_GROUP_MGT = "GROUP_MGT";
 export const MENU_USER_MGT = "USER_MGT";
 export const MENU_SYS_SETUP = "SYS_SETUP";
+export const MENU_ASSET_G_MGT = "ASSET_G_MGT";
 export const MENU_COMM_CODE = "COMM_CODE";
 export const MENU_USER_ACCESS_HIST = "USER_ACCESS_HIST";
 
@@ -50,4 +51,5 @@ export type MENU_CODE =
     | typeof MENU_USER_MGT
     | typeof MENU_SYS_SETUP
     | typeof MENU_COMM_CODE
-    | typeof MENU_USER_ACCESS_HIST;
+    | typeof MENU_USER_ACCESS_HIST
+    | typeof MENU_ASSET_G_MGT;

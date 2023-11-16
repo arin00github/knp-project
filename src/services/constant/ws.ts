@@ -1,6 +1,6 @@
 import { GetSituationNoticeResult, GetSituationResponseResult } from "../api/tmsKnpNotice/TmsKnpNoticeInterface";
 
-import { DS_STEP, DSAS_STEP, SITU_LEVEL } from "./disaster.interfaces";
+import { DS_STEP, DSAS_STEP, SITU_LEVEL } from "./disaster";
 
 export const MSG_DISASTER_REG = "regsituation"; // 상황 전파 발생
 export const MSG_DISASTER_MODIFY = "modsituation"; // 상황 수정
