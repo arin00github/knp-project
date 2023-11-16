@@ -10,9 +10,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
-import { GetLayerStylesResult } from "../../api/tmsKnp/TmsKnpInterface";
-import { AssetPopupInfo } from "../../interfaces";
+import { GetLayerStylesResult, GetTrailLayerBufferResult } from "../../api/tmsKnp/TmsKnpInterface";
+import { AssetPopupInfo, FeatureType } from "../../interfaces";
 
+interface TrailLayerSaveInfo {
+    assets: FeatureType[] | GetTrailLayerBufferResult[];
+    popupInfo: AssetPopupInfo;
+    redraw: boolean;
+}
 export interface GisState {
     allLayers: string[];
     allLayerStyles: GetLayerStylesResult[];
@@ -26,6 +31,7 @@ export interface GisState {
     trailLayerAssetInfo: AssetPopupInfo | undefined;
     trailLayerSearchAssetInfo: AssetPopupInfo | undefined;
     trailLayerSearchLoading: boolean;
+    trailLayerSaveInfo: TrailLayerSaveInfo;
 }
 
 const initialState: GisState = {
@@ -41,6 +47,15 @@ const initialState: GisState = {
     trailLayerAssetInfo: undefined,
     trailLayerSearchAssetInfo: undefined,
     trailLayerSearchLoading: false,
+    trailLayerSaveInfo: {
+        assets: [],
+        popupInfo: {
+            x: 0,
+            y: 0,
+            features: [],
+        },
+        redraw: false,
+    },
 };
 
 export const gisSlice = createSlice({
@@ -86,6 +101,20 @@ export const gisSlice = createSlice({
         setStoredTrailLayerSearchLoading: (state, action: PayloadAction<boolean>) => {
             state.trailLayerSearchLoading = action.payload;
         },
+        setStoredTrailLayerSaveInfo: (state, action: PayloadAction<TrailLayerSaveInfo>) => {
+            state.trailLayerSaveInfo = action.payload;
+        },
+        resetStoredTrailLayerSaveInfo: (state) => {
+            state.trailLayerSaveInfo = {
+                assets: [],
+                popupInfo: {
+                    x: 0,
+                    y: 0,
+                    features: [],
+                },
+                redraw: false,
+            };
+        },
         resetStoredGis: (state) => {
             Object.assign(state, initialState);
         },
@@ -107,6 +136,8 @@ export const {
     setStoredIsMapInit,
     setStoredTrailLayerSearchAssetInfo,
     setStoredTrailLayerSearchLoading,
+    setStoredTrailLayerSaveInfo,
+    resetStoredTrailLayerSaveInfo,
     resetStoredGis,
 } = gisSlice.actions;
 
