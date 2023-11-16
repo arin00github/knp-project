@@ -2,9 +2,9 @@ import React, { useMemo } from "react";
 
 import { Redirect, Route, Switch } from "react-router";
 
-import { InitDataState } from "../../../services/store/common/init-data-slice";
-import { useAppSelector } from "../../../services/store/hooks";
-import { Menu } from "../../components/common";
+import { InitDataState } from "@/services/store/common/init-data-slice";
+import { useAppSelector } from "@/services/store/hooks";
+import { Menu } from "@/views/components/common";
 
 interface SubMenuRoutesProps {
     parentPath: string;

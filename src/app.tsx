@@ -9,7 +9,10 @@
  */
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import { ThemeProvider } from "styled-components";
+
+import "./i18n/i18n";
 
 import { NewAuthInterface } from "./services/api/auth/AuthApi";
 import { CheckLoginResponse } from "./services/api/auth/AuthInterface";
@@ -49,11 +52,13 @@ const App = (): JSX.Element => {
 
     const dispatch = useAppDispatch();
 
-    //const storedCommon = useAppSelector((state) => state.common) as CommonState;
-    //const { locale } = storedCommon;
+    const storedCommon = useAppSelector((state) => state.common);
+    const { locale } = storedCommon;
 
     const storedInitData = useAppSelector((state) => state.initData) as InitDataState;
     const { loginUserInfo } = storedInitData;
+
+    const { i18n } = useTranslation();
 
     //웹 소켓 담는 변수
     const ws = useRef<WebSocket | null>(null);
@@ -68,8 +73,7 @@ const App = (): JSX.Element => {
             ws.current = new WebSocket(`${currentHost}/tms-knp-notice/api/v1/ws`);
             dispatch(setWebSocket(ws.current));
 
-            ws.current.onopen = (event: Event) => {
-                console.log("websocket open", event);
+            ws.current.onopen = () => {
                 const msg = {
                     cmd: "userregistry",
                     body: { group_id: gid, user_id: uid },
@@ -334,6 +338,40 @@ const App = (): JSX.Element => {
         isAuthenticated,
         loginUserInfo,
     ]);
+
+    /**
+     * @private
+     * @description [useEffect hooks] 저장된 공통데이터를 다국어 처리에 적용
+     */
+    useEffect(() => {
+        const {
+            layers,
+            layerStyles,
+            resources,
+            parkCodes,
+            parkOfficeCodes,
+            assetTypeCodes,
+            disasterCodes,
+            situationCodes,
+        } = storedInitData;
+        const translationResources = {
+            LAYER: layers.reduce((prev, curr) => ({ ...prev, [curr.layer_id]: curr.layer_name }), {} as object),
+            LAYER_STYLES: layerStyles.reduce((prev, curr) => ({ ...prev, [curr.layer_id]: curr.image }), {} as object),
+            RESOURCE: resources.reduce(
+                (prev, curr) => ({ ...prev, [curr.resource_code]: curr.resource_name }),
+                {} as object
+            ),
+            PARK: parkCodes.reduce((prev, curr) => ({ ...prev, [curr.code]: curr.code_name }), {} as object),
+            PARK_OFFICE: parkOfficeCodes.reduce(
+                (prev, curr) => ({ ...prev, [curr.code]: curr.code_name }),
+                {} as object
+            ),
+            ASSET_TYPE: assetTypeCodes.reduce((prev, curr) => ({ ...prev, [curr.code]: curr.code_name }), {} as object),
+            DISASTER: disasterCodes.reduce((prev, curr) => ({ ...prev, [curr.code]: curr.code_name }), {} as object),
+            SITUATION: situationCodes.reduce((prev, curr) => ({ ...prev, [curr.code]: curr.code_name }), {} as object),
+        };
+        i18n.addResourceBundle(locale, "translations", translationResources);
+    }, [i18n, locale, storedInitData]);
 
     return (
         <ThemeProvider theme={themeMode === "DARK" ? darkTheme : lightTheme}>

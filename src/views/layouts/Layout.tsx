@@ -35,7 +35,7 @@ export const Layout = () => {
     return (
         <StyledLayoutDiv /* className={`${toggled ? "toggled" : ""}`} */>
             <Aside>
-                <ProSideBar />
+                <ProSideBar isCollapsed={isCollapsed} />
             </Aside>
             <ContentLayout>
                 {process.env.REACT_APP_HEADER === "true" && (

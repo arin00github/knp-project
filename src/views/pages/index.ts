@@ -7,8 +7,7 @@
  * @history
  * - 2023-02-02, 최초 작성
  */
-export * from "./common/RootRoutePage";
-export * from "./common/SubMenuRoutes";
+
 // 대시보드
 export * from "./dashboard/DashboardSpecialStatusPage";
 export * from "./dashboard/DashboardSituationStatusPage";

@@ -2,7 +2,8 @@
 export const DS_OCCUR = "DS01"; // 발생
 export const DS_PROCEED = "DS02"; // 진행
 export const DS_COMPLETED = "DS03"; // 상황종료
-export type DS_STEP = typeof DS_OCCUR | typeof DS_PROCEED | typeof DS_COMPLETED | "";
+export const DS_OCCUR_AND_PROCEED = "DS04"; // 발생, 진행
+export type DS_STEP = typeof DS_OCCUR | typeof DS_PROCEED | typeof DS_COMPLETED | typeof DS_OCCUR_AND_PROCEED | "";
 
 // 재난상황 (situation_level1)
 export const SITU_NATURAL_DISASTER = "ST01"; // 자연재난
