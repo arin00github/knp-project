@@ -7,7 +7,7 @@ import {
     SITU_NATURAL_DISASTER,
     SITU_SAFETY_ACCIDENT,
     SITU_WILD_FIRE,
-} from "../interfaces";
+} from "../constant";
 
 export const getSituationColor = (situationLevel: SITU_LEVEL): SITU_COLOR => {
     let situationColor: SITU_COLOR = "";

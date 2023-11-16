@@ -19,6 +19,7 @@ import parksReducer from "./management/parks-slice";
 import resourcesReducer from "./management/resources-slice";
 import manualReducer from "./manualManagement/manual-slice";
 import periodicalReportsReducer from "./periodicalReportManagement/periodical-reports-slice";
+import assetGroupReducer from "./setting/asset-group-slice";
 import authReducer from "./setting/auth-slice";
 import commonCodeReducer from "./setting/common-code-slice";
 import groupsReducer from "./setting/groups-slice";
@@ -230,6 +231,11 @@ const periodicalReportsConfig = {
     ],
 };
 
+const assetGroupConfig = {
+    key: "assetGroup",
+    storage,
+};
+
 export const reducers = {
     common: persistReducer(commonConfig, commonReducer),
     initData: persistReducer(initDataConfig, initDataReducer),
@@ -253,6 +259,7 @@ export const reducers = {
     smsTemplate: persistReducer(smsTemplateConfig, smsTemplateReducer),
     helpMessage: persistReducer(helpMessageConfig, helpMessageReducer),
     periodicalReports: persistReducer(periodicalReportsConfig, periodicalReportsReducer),
+    assetGroup: persistReducer(assetGroupConfig, assetGroupReducer),
 };
 
 const baseUrl = document.getElementsByTagName("base")[0].getAttribute("href") as string;

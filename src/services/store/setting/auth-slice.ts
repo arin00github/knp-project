@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
 import { GetAuthByIdResult } from "../../api/tmsKnp/TmsKnpInterface";
-import { AUTH_CODE } from "../../interfaces";
+import { AUTH_CODE } from "../../constant";
 
 export interface AuthDetailData {
     originalData: GetAuthByIdResult[];

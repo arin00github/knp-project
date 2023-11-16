@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
-import { SITU_LEVEL } from "../../interfaces";
+import { SITU_LEVEL } from "../../constant";
 
 export interface BroadcastsFilterParams {
     situation_level1?: SITU_LEVEL;

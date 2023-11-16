@@ -13,3 +13,7 @@ export const divideArray = (array: any[]): any[] => {
 export const uniqArray = (array: any[]): any[] => {
     return Array.from(new Set(array));
 };
+
+export function sortArrayOfObjects<T extends Record<K, string>, K extends keyof T>(arr: T[], key: K): T[] {
+    return arr.sort((a, b) => a[key].localeCompare(b[key]));
+}

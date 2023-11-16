@@ -11,7 +11,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
 import { GetLayerStylesResult, GetTrailLayerBufferResult } from "../../api/tmsKnp/TmsKnpInterface";
-import { AssetPopupInfo, FeatureType } from "../../interfaces";
+import { AssetPopupInfo, FeatureType } from "../../constant";
 
 interface TrailLayerSaveInfo {
     assets: FeatureType[] | GetTrailLayerBufferResult[];

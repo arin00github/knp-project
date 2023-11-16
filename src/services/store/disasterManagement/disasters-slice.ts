@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
-import { DS_STEP, SITU_LEVEL } from "../../interfaces";
+import { DS_STEP, SITU_LEVEL } from "../../constant";
 
 export interface DisastersFilterParams {
     situation_step?: DS_STEP;

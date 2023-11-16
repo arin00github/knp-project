@@ -10,7 +10,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 
-import { LAYER_NPO_MAIN } from "../../interfaces";
+import { LAYER_NPO_MAIN } from "../../constant";
 
 export interface AssetsFilterParams {
     layer_id: string;

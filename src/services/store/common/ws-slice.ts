@@ -21,7 +21,7 @@ import {
     WsMessageEndApprove,
     WsMessageEdit,
     WsMessageEndRefuse,
-} from "../../interfaces";
+} from "../../constant";
 
 export type WsMessage =
     | WsMessageDisasterReg

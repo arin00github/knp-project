@@ -15,7 +15,7 @@ export const downloadFileWithBase64FileName = (response: AxiosResponse): void =>
     const contentDisposition = response.headers["content-disposition"]; // 파일 이름
     let fileName = "unknown";
     if (contentDisposition) {
-        const [fileNameMatch] = contentDisposition.split(";").filter((str) => str.includes("filename"));
+        const [fileNameMatch] = contentDisposition.split(";").filter((str: string) => str.includes("filename"));
         if (fileNameMatch) {
             const base64FileName = fileNameMatch.split('"')[1];
             fileName = base64ToUtf8(base64FileName);
@@ -37,7 +37,7 @@ export const downloadFile = (response: AxiosResponse): void => {
     const contentDisposition = response.headers["content-disposition"]; // 파일 이름
     let fileName = "unknown";
     if (contentDisposition) {
-        const [fileNameMatch] = contentDisposition.split(";").filter((str) => str.includes("filename"));
+        const [fileNameMatch] = contentDisposition.split(";").filter((str: string) => str.includes("filename"));
         if (fileNameMatch) [, fileName] = fileNameMatch.split('"');
     }
 
