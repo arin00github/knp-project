@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 
 import { Redirect, Route, Switch } from "react-router";
 
+import { MENU_ASSET_G_MGT } from "@/services/constant";
 import { InitDataState } from "@/services/store/common/init-data-slice";
 import { useAppSelector } from "@/services/store/hooks";
 import { Menu } from "@/views/components/common";
@@ -41,7 +42,10 @@ export const SubMenuRoutes = (props: SubMenuRoutesProps): JSX.Element => {
             {subMenus.map((subMenu, index) => (
                 <Route key={index} path={subMenu.path} component={subMenu.component} exact={subMenu.isLeafMenu} />
             ))}
-            <Redirect from="*" to={subMenus[0].path}></Redirect>
+            <Redirect
+                from="*"
+                to={subMenus.find((val) => val.code === MENU_ASSET_G_MGT)?.path || "setting/asset-group"}
+            ></Redirect>
         </Switch>
     );
 };

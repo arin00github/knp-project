@@ -11,6 +11,7 @@ import { RouteComponentProps } from "react-router-dom";
 
 import {
     MENU_3DGIS,
+    MENU_ASSET_G_MGT,
     MENU_ASSET_MGT,
     MENU_AUTH_MGT,
     MENU_BROAD_HIST,
@@ -32,7 +33,7 @@ import {
     MENU_SYS_SETUP,
     MENU_USER_ACCESS_HIST,
     MENU_USER_MGT,
-} from "../../services/interfaces";
+} from "../../services/constant";
 import { DashboardSituationStatus, DashboardSpecialStatus } from "../components/dashboard";
 import { BroadcastList, DisasterDetail, DisasterList } from "../components/disasterManagement";
 import { GisWrapper } from "../components/gis";
@@ -40,6 +41,11 @@ import { AssetList, EditAsset, ParkManagement, ResourceList } from "../component
 import { ManualManagementList } from "../components/manualManagement";
 import { PeriodicalReportManagement } from "../components/periodicalReportManagement";
 import { ReportDisaster } from "../components/reportDisaster";
+import AssetGroupManagement from "../components/setting/assetGroupManagement";
+import AssetGroupManagementPage from "../pages/setting/AssetGroupManagementPage";
+
+import { RootRoutePage } from "./RootRoutePage";
+
 import {
     AuthManagement,
     CommonCode,
@@ -50,10 +56,7 @@ import {
     DisasterReportManagement,
     HelpMessageManagement,
     SmsTemplateManagement,
-} from "../components/setting";
-
-import { RootRoutePage } from "./RootRoutePage";
-
+} from "@/views/components/setting";
 import {
     AssetManagementPage,
     AuthManagementPage,
@@ -438,6 +441,21 @@ const SettingMenu: Menu = {
                     code: "",
                     path: "/setting/user",
                     component: UserManagement,
+                    isLeafMenu: true,
+                },
+            ],
+        },
+        {
+            name: "자원종류관리",
+            code: MENU_ASSET_G_MGT,
+            path: "/setting/asset-group",
+            component: AssetGroupManagementPage,
+            children: [
+                {
+                    name: "",
+                    code: "",
+                    path: "/setting/asset-group",
+                    component: AssetGroupManagement,
                     isLeafMenu: true,
                 },
             ],
