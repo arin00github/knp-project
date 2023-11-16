@@ -17,7 +17,7 @@ import styled from "styled-components";
 
 import MAP_POINT from "../../../assets/icons/map_point.png";
 import SEARCH_LOCATION_MARKER from "../../../assets/icons/search_location.svg";
-import { AssetPopupInfo, FeatureType } from "../../../services/interfaces";
+import { AssetPopupInfo, FeatureType } from "../../../services/constant";
 import { InitDataState } from "../../../services/store/common/init-data-slice";
 import {
     GisState,

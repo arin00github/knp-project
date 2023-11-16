@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import styled from "styled-components";
 
-import { THEME_LIGHT } from "../../../services/interfaces";
+import { THEME_LIGHT } from "../../../services/constant";
 import { CommonState } from "../../../services/store/common/common-slice";
 import { useAppSelector } from "../../../services/store/hooks";
 

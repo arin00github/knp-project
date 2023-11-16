@@ -22,3 +22,5 @@ export * from "./systemSetting/helpMessageManagement/HelpMessageManagement";
 export * from "./commonCode/CommonCode";
 // 사용자 접속 이력
 export * from "./userLog/UserLogsList";
+// 자산 종규 관리
+export * from "./assetGroupManagement";
