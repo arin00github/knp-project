@@ -19,8 +19,8 @@ import {
     RockFallSensorLayerProperties,
     ShelterLayerProperties,
     VrteLayerProperties,
-} from "../../interfaces";
-import { PERIODIC_STATE } from "../../interfaces/periodic-report.interfaces";
+} from "../../constant";
+import { PERIODIC_STATE } from "../../constant/periodic-report";
 
 /*******************************************************************************
  * common interface

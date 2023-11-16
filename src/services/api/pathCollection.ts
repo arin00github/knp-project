@@ -12,8 +12,10 @@ export type configureUrlParams = {
 export const configureUrl = ({ testurl, devurl }: configureUrlParams) => {
     if (process.env.NODE_ENV === "development") {
         return devurl;
-    } else {
+    } else if (process.env.NODE_ENV === "test") {
         return testurl;
+    } else {
+        return devurl;
     }
 };
 
@@ -35,6 +37,10 @@ export const LAYER_API_URL = {
     getLayerList_dev: `${TMS_URL}/layer/get/layer-list`,
     getStyleList_test: makeTestUrl(`${TMS_URL}/layer/get/style-list`),
     getStyleList_dev: `${TMS_URL}/layer/get/style-list`,
+    getAssetGroups_test: makeTestUrl(`${TMS_URL}/layer/get/list`),
+    getAssetGroups_dev: `${TMS_URL}/layer/get/list`,
+    getAssetGroupDetail_test: makeTestUrl(`${TMS_URL}/layer/get/layer_byid`),
+    getAssetGroupDetail_dev: `${TMS_URL}/layer/get/layer_byid`,
 };
 
 export const CODE_API_URL = {

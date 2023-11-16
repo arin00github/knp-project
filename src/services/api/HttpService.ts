@@ -11,6 +11,11 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const HTTP_REQUEST_TIMEOUT = 15000;
 
+export const HTTP_REQEST = {
+    method: "POST",
+    timeout: HTTP_REQUEST_TIMEOUT,
+};
+
 /**
  * @name buildParams
  * @function
@@ -41,3 +46,16 @@ export const executeRequest = async (path: string, config?: AxiosRequestConfig):
     }
     return null;
 };
+
+export interface TmsKnpResponse {
+    code: number;
+    message: string;
+    responseTime: string;
+}
+
+export interface ErrorResponse {
+    code: number;
+    message: string;
+    responseTime: string;
+    response: undefined;
+}

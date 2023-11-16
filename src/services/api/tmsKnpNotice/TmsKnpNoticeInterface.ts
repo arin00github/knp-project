@@ -8,7 +8,7 @@
  * - 2022-11-21, 최초 작성
  */
 
-import { DS_STEP, DSAS_STEP, SITU_LEVEL, TRAIL_VICINITY } from "../../interfaces";
+import { DS_STEP, DSAS_STEP, SITU_LEVEL, TRAIL_VICINITY } from "../../constant";
 
 /*******************************************************************************
  * common interface
