@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/services/store/hooks";
 import { StyledPageDiv } from "@/styles/components/Layout.styles";
 import { SubMenuRoutes } from "@/views/router/SubMenuRoutes";
 
-export const DashboardSituationStatusPage = ({ match }: RouteComponentProps): JSX.Element => {
+export const DisasterHistoryPage = ({ match }: RouteComponentProps): JSX.Element => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {

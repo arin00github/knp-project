@@ -16,12 +16,12 @@ export * from "./gis/GisPage";
 // 상황 전파
 export * from "./reportDisaster/ReportDisasterPage";
 // 상황 및 보고 관리
-export * from "./disasterManagement/DisasterHistoryPage";
-export * from "./disasterManagement/BroadcastHistoryPage";
+export * from "./disaster/DisasterHistoryPage";
+export * from "./disaster/BroadcastHistoryPage";
 // 정기 보고 관리
-export * from "./periodicalReportManagement/PeriodicalReportManagementPage";
+export * from "./periodicalReport/PeriodicalReportManagementPage";
 // 메뉴얼 관리
-export * from "./manualManagement/ManualManagementPage";
+export * from "./manual/ManualManagementPage";
 // 국립공원 자산관리
 export * from "./management/ParkManagementPage";
 export * from "./management/AssetManagementPage";
@@ -33,3 +33,4 @@ export * from "./setting/CommonCodePage";
 export * from "./setting/UserLogsPage";
 export * from "./setting/GroupManagementPage";
 export * from "./setting/SystemSettingPage";
+export * from "./setting/AssetGroupManagementPage";

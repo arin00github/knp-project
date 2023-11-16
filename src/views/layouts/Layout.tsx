@@ -28,7 +28,7 @@ export const Layout = () => {
 
     const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
-    const GIS_URL = "/gis";
+    const ASSET_GROUP_URL = "/setting/asset-group";
 
     console.log("authMenus", authMenus);
 
@@ -59,7 +59,7 @@ export const Layout = () => {
                         {authMenus.map((menu, index) => (
                             <Route key={index} path={menu.path} component={menu.component} exact={menu.isLeafMenu} />
                         ))}
-                        <Redirect from="*" to={GIS_URL}></Redirect>
+                        <Redirect from="*" to={ASSET_GROUP_URL}></Redirect>
                     </Switch>
                 </Content>
             </ContentLayout>
