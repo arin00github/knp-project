@@ -1,0 +1,31 @@
+{
+    "COMMON": {},
+    "MENU": {
+        "DASH_BOARD": "Dashboard",
+        "3D_GIS": "3D GIS",
+        "SITUATION_PROPAGATION": "Situation Propagation",
+        "SITUATION_REPORT_MNG": "Situation And Reporting Management",
+        "ASSET_MNG": "Asset Management",
+        "SYSTEM_SETTING": "System Setting",
+        "USER_MNG": "User Management"
+    },
+    "BUTTON": {
+        "ADD": "Add",
+        "MODIFY": "Modify",
+        "DELETE": "Delete",
+        "UPLOAD": "Choose File",
+        "RESET": "Reset",
+        "CANCEL": "Cancel",
+        "CLOSE": "Close",
+        "SEARCH": "Search",
+        "CONFIRM": "Confirm",
+        "LIST": "List"
+    },
+    "USER_INFO": {
+        "LOGOUT": "Logout",
+        "MOVE_MAIN_PAGE": "Move Main Page",
+        "CHANGE_PWD": "Change Password",
+        "MODIFY_PERSON_INFO": "Modifying Personal Information",
+        "CONFIG_SETTING": "Configuration Settings"
+    }
+}

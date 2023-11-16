@@ -1,0 +1,41 @@
+{
+    "COMMON": {
+        "SEARCH_PLACE_HOLDER": "검색어를 입력하세요."
+    },
+    "MENU": {
+        "DASH_BOARD": "대시보드",
+        "3D_GIS": "3D GIS",
+        "SITUATION_PROPAGATION": "상황 전파",
+        "SITUATION_REPORT_MNG": "상황 및 보고 관리",
+        "ASSET_MNG": "자산관리",
+        "SYSTEM_SETTING": "시스템 설정",
+        "USER_MNG": "사용자 관리"
+    },
+    "BUTTON": {
+        "ADD": "추가",
+        "MODIFY": "수정",
+        "DELETE": "삭제",
+        "UPLOAD": "파일 선택",
+        "RESET": "초기화",
+        "CANCEL": "취소",
+        "CLOSE": "닫기",
+        "SEARCH": "검색",
+        "CONFIRM": "확인",
+        "LIST": "목록"
+    },
+    "USER_INFO": {
+        "LOGOUT": "로그아웃",
+        "MOVE_MAIN_PAGE": "메인 페이지 이동",
+        "CHANGE_PWD": "비밀번호 변경",
+        "MODIFY_PERSON_INFO": "개인정보 수정",
+        "CONFIG_SETTING": "환경설정"
+    },
+    "TABLE": {
+        "NO_DATA": "데이터가 없습니다.",
+        "TOTAL_CNT": "전체",
+        "SELECTED_CNT": "선택",
+        "UNIT": {
+            "EA": "개"
+        }
+    }
+}
