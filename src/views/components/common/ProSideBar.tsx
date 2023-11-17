@@ -74,7 +74,6 @@ interface ProSideBarProps {
 }
 
 export const ProSideBar = (props: ProSideBarProps) => {
-    console.log("props", props);
     //const dispatch = useAppDispatch();
     //const storedCommon = useAppSelector((state) => state.common) as CommonState;
 
@@ -176,7 +175,6 @@ export const ProSideBar = (props: ProSideBarProps) => {
     //     setCollapsed(isCollapsed);
     //     dispatch(setStoredCollapsedChange(true));
     // }, [dispatch, isCollapsed]);
-    console.log("authMenus", authMenus);
 
     return (
         <StyledOverrideProSidebar collapsed={collapsed} width={250} collapsedWidth={60}>

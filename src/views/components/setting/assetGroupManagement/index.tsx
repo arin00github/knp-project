@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
-import AssetGroupListPage from "./ListPage";
+import EditFormPage from "./editPage/EditFormPage";
+import AssetGroupListPage from "./listPage";
 
 import { useAppSelector, useAppDispatch } from "@/services/store/hooks";
 import { setStoredFilterParams, setStoredSelectedRow, setIsFormOpen } from "@/services/store/setting/asset-group-slice";
@@ -23,7 +24,11 @@ const AssetGroupManagement = () => {
             <StyledPageLeft isSideBarOpen={isFormOpen}>
                 <AssetGroupListPage />
             </StyledPageLeft>
-            {isFormOpen && <StyledPageRight></StyledPageRight>}
+            {isFormOpen && (
+                <StyledPageRight>
+                    <EditFormPage />
+                </StyledPageRight>
+            )}
         </StyledPageWrap>
     );
 };

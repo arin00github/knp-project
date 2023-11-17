@@ -46,8 +46,6 @@ interface DisasterListTableProps {
 export const DisasterListTable = (props: DisasterListTableProps): JSX.Element => {
     const { disasters } = props;
 
-    console.log("disasters", disasters);
-
     const dispatch = useAppDispatch();
     const history = useHistory();
     const tableRef = useRef(null);

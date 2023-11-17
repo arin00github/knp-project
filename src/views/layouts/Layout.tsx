@@ -30,8 +30,6 @@ export const Layout = () => {
 
     const ASSET_GROUP_URL = "/setting/asset-group";
 
-    console.log("authMenus", authMenus);
-
     return (
         <StyledLayoutDiv /* className={`${toggled ? "toggled" : ""}`} */>
             <Aside>

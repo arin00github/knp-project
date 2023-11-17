@@ -37,7 +37,7 @@ const ListPageHeader = () => {
             <Stack justifyContent="space-between" gap="32px">
                 <form onSubmit={handleSubmit}>
                     <Stack>
-                        <FormControl>
+                        <FormControl style={{ display: "flex", alignItems: "center" }}>
                             <StyledFilterBarFormLabel htmlFor="asset-group-search">
                                 자원종류 관리
                             </StyledFilterBarFormLabel>

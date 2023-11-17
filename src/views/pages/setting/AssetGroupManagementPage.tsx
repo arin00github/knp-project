@@ -1,10 +1,18 @@
 import React from "react";
 
-const AssetGroupManagementPage = () => {
+import { RouteComponentProps } from "react-router-dom";
+
+import { useAppSelector } from "@/services/store/hooks";
+import { StyledPageDiv } from "@/styles";
+import { SubMenuRoutes } from "@/views/router/SubMenuRoutes";
+
+const AssetGroupManagementPage = ({ match }: RouteComponentProps) => {
+    const storedCommon = useAppSelector((state) => state.common);
+    const { pageLoading } = storedCommon;
     return (
-        <div>
-            <div>AssetGroupManagement</div>
-        </div>
+        <StyledPageDiv>
+            <SubMenuRoutes parentPath={match.path} />
+        </StyledPageDiv>
     );
 };
 

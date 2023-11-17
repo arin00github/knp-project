@@ -1,20 +1,28 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import moment from "moment";
-import { ColumnDefinition } from "react-tabulator";
+import { ColumnDefinition, ReactTabulator } from "react-tabulator";
+import { Tabulator } from "react-tabulator/lib/types/TabulatorTypes";
 
-import { AssetGroupListItem, GetLayerStylesResult, GetLayersResult } from "@/services/api/layer/LayerInterface";
+import { AssetGroupListItem } from "@/services/api/layer/LayerInterface";
+import { useAppDispatch, useAppSelector } from "@/services/store/hooks";
+import { setIsFormOpen, setStoredSelectedRow } from "@/services/store/setting/asset-group-slice";
+import { StyledTableWrap } from "@/styles";
+import { TableRowCount } from "@/views/components/common/TableRowCount";
 
 interface ListPageBodyProps {
     data: AssetGroupListItem[];
-    layers: GetLayersResult[];
-    layerStyles: GetLayerStylesResult[];
 }
 
 const ListPageBody = (props: ListPageBodyProps) => {
-    const { data, layers, layerStyles } = props;
+    const { data } = props;
 
-    const [loading, setLoading] = React.useState<boolean>(false);
+    const dispatch = useAppDispatch();
+
+    const storedAssetGroups = useAppSelector((state) => state.assetGroup);
+    const { filterParams } = storedAssetGroups;
+
+    const tableRef = React.useRef<typeof ReactTabulator>(null);
 
     /**
      * @private
@@ -101,10 +109,48 @@ const ListPageBody = (props: ListPageBodyProps) => {
         ];
     }, []);
 
+    const customFilter = useCallback((data: AssetGroupListItem, filterParams: { search_word?: string }) => {
+        const { search_word } = filterParams;
+
+        let isValid = true;
+        if (isValid && search_word && search_word !== "") {
+            const regex = new RegExp(search_word, "i");
+            isValid = regex.test(data.layer_name) || regex.test(data.layer_id);
+        }
+
+        return isValid;
+    }, []);
+
+    const filterdData = useMemo(() => {
+        return data.filter((item) => customFilter(item, filterParams));
+    }, [filterParams, data, customFilter]);
+
+    const handleRowClick = useCallback(
+        (e: UIEvent, row: Tabulator.RowComponent) => {
+            const selectData = row.getData();
+            dispatch(setIsFormOpen(true));
+            dispatch(setStoredSelectedRow(selectData.layer_id));
+        },
+        [dispatch]
+    );
+
     return (
-        <div>
-            <div>ListBody</div>
-        </div>
+        <StyledTableWrap>
+            <ReactTabulator
+                ref={tableRef}
+                data={filterdData}
+                columns={columns}
+                options={{
+                    height: "calc(100% - 30px)",
+                    layout: "fitColumns",
+                    placeholder: "데이터가 없습니다.",
+                }}
+                events={{
+                    rowClick: handleRowClick,
+                }}
+            />
+            <TableRowCount totalCount={filterdData.length} />
+        </StyledTableWrap>
     );
 };
 
