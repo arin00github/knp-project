@@ -14,8 +14,10 @@ import { ThemeProvider } from "styled-components";
 
 import "./i18n/i18n";
 
-import { NewAuthInterface } from "./services/api/auth/AuthApi";
 import { CheckLoginResponse } from "./services/api/auth/AuthInterface";
+import AuthService from "./services/api/auth/AuthService";
+import CodeService from "./services/api/code/CodeService";
+import LayerService from "./services/api/layer/LayerService";
 import { NewTmsKnpInterface } from "./services/api/tmsKnp/TmsKnpApi";
 import {
     GetCodeInfoResponse,
@@ -66,50 +68,50 @@ const App = (): JSX.Element => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     //const [loading, setLoading] = useState<boolean>(true);
 
-    const createWebSocket = useCallback(
-        (gid: string, uid: string, isRetry = false) => {
-            const protocol = window.location.protocol.indexOf("https") > -1 ? "wss://" : "ws://";
-            const currentHost = `${protocol}${window.location.host}`;
-            ws.current = new WebSocket(`${currentHost}/tms-knp-notice/api/v1/ws`);
-            dispatch(setWebSocket(ws.current));
+    // const createWebSocket = useCallback(
+    //     (gid: string, uid: string, isRetry = false) => {
+    //         const protocol = window.location.protocol.indexOf("https") > -1 ? "wss://" : "ws://";
+    //         const currentHost = `${protocol}${window.location.host}`;
+    //         ws.current = new WebSocket(`${currentHost}/tms-knp-notice/api/v1/ws`);
+    //         dispatch(setWebSocket(ws.current));
 
-            ws.current.onopen = () => {
-                const msg = {
-                    cmd: "userregistry",
-                    body: { group_id: gid, user_id: uid },
-                };
-                ws.current?.send(JSON.stringify(msg));
-            };
+    //         ws.current.onopen = () => {
+    //             const msg = {
+    //                 cmd: "userregistry",
+    //                 body: { group_id: gid, user_id: uid },
+    //             };
+    //             ws.current?.send(JSON.stringify(msg));
+    //         };
 
-            ws.current.onmessage = (event: MessageEvent) => {
-                const parseMessage = JSON.parse(event.data);
-                if (Object.keys(parseMessage).length > 0) {
-                    dispatch(setStoredWsMessage(parseMessage));
-                }
-            };
+    //         ws.current.onmessage = (event: MessageEvent) => {
+    //             const parseMessage = JSON.parse(event.data);
+    //             if (Object.keys(parseMessage).length > 0) {
+    //                 dispatch(setStoredWsMessage(parseMessage));
+    //             }
+    //         };
 
-            ws.current.onclose = (event: CloseEvent) => {
-                if (!event.wasClean && !isRetry) {
-                    createWebSocket(gid, uid, true);
-                }
-            };
+    //         ws.current.onclose = (event: CloseEvent) => {
+    //             if (!event.wasClean && !isRetry) {
+    //                 createWebSocket(gid, uid, true);
+    //             }
+    //         };
 
-            ws.current.onerror = (event: Event) => {
-                console.error("WebSocket connection error", event);
-            };
-        },
-        [dispatch]
-    );
+    //         ws.current.onerror = (event: Event) => {
+    //             console.error("WebSocket connection error", event);
+    //         };
+    //     },
+    //     [dispatch]
+    // );
 
     /**
      * @private
      * @description [useEffect hook] mouth 시 소켓 연결
      */
-    useEffect(() => {
-        if (!ws.current && loginUserInfo) {
-            createWebSocket(loginUserInfo.gid, loginUserInfo.uid);
-        }
-    }, [createWebSocket, loginUserInfo]);
+    // useEffect(() => {
+    //     if (!ws.current && loginUserInfo) {
+    //         createWebSocket(loginUserInfo.gid, loginUserInfo.uid);
+    //     }
+    // }, [createWebSocket, loginUserInfo]);
 
     /**
      * @name checkLogin
@@ -119,7 +121,7 @@ const App = (): JSX.Element => {
      * @return {Promise<CheckLoginResponse>}
      */
     const checkLogin = useCallback(async (): Promise<CheckLoginResponse> => {
-        const authService = NewAuthInterface();
+        const authService = AuthService();
 
         const checkLoginResponse = await authService.checkLogin();
         return new Promise((resolve, reject) => {
@@ -175,8 +177,8 @@ const App = (): JSX.Element => {
      * @return {Promise<GetLayersResponse>}
      */
     const getLayers = useCallback(async (): Promise<GetLayersResponse> => {
-        const tmsKnpService = NewTmsKnpInterface();
-        const getLayersResponse = await tmsKnpService.getLayers();
+        const layerService = LayerService();
+        const getLayersResponse = await layerService.getLayers();
         return new Promise((resolve, reject) => {
             if (getLayersResponse?.code === 200) {
                 resolve(getLayersResponse as GetLayersResponse);
@@ -194,8 +196,8 @@ const App = (): JSX.Element => {
      * @return {Promise<GetLayerStylesResponse>}
      */
     const getLayerStyles = useCallback(async (): Promise<GetLayerStylesResponse> => {
-        const tmsKnpService = NewTmsKnpInterface();
-        const getLayerStylesResponse = await tmsKnpService.getLayerStyles();
+        const layerService = LayerService();
+        const getLayerStylesResponse = await layerService.getLayerStyles();
         return new Promise((resolve, reject) => {
             if (getLayerStylesResponse) {
                 resolve(getLayerStylesResponse as GetLayerStylesResponse);
@@ -205,24 +207,24 @@ const App = (): JSX.Element => {
         });
     }, []);
 
-    /**
-     * @name getResourceInfo
-     * @async
-     * @function
-     * @description 장비 정보 조회
-     * @return {Promise<GetResourceInfoResponse>}
-     */
-    const getResourceInfo = useCallback(async (): Promise<GetResourceInfoResponse> => {
-        const tmsKnpService = NewTmsKnpInterface();
-        const getResposneInfoResponse = await tmsKnpService.getResourceInfo();
-        return new Promise((resolve, reject) => {
-            if (getResposneInfoResponse?.code === 200) {
-                resolve(getResposneInfoResponse as GetResourceInfoResponse);
-            } else {
-                reject(getResposneInfoResponse?.message);
-            }
-        });
-    }, []);
+    // /**
+    //  * @name getResourceInfo
+    //  * @async
+    //  * @function
+    //  * @description 장비 정보 조회
+    //  * @return {Promise<GetResourceInfoResponse>}
+    //  */
+    // const getResourceInfo = useCallback(async (): Promise<GetResourceInfoResponse> => {
+    //     const tmsKnpService = NewTmsKnpInterface();
+    //     const getResposneInfoResponse = await tmsKnpService.getResourceInfo();
+    //     return new Promise((resolve, reject) => {
+    //         if (getResposneInfoResponse?.code === 200) {
+    //             resolve(getResposneInfoResponse as GetResourceInfoResponse);
+    //         } else {
+    //             reject(getResposneInfoResponse?.message);
+    //         }
+    //     });
+    // }, []);
 
     /**
      * @name getCodeInfo
@@ -232,8 +234,8 @@ const App = (): JSX.Element => {
      * @return {Promise<GetCodeInfoResponse>}
      */
     const getCodeInfo = useCallback(async (pCode: string): Promise<GetCodeInfoResponse> => {
-        const tmsKnpService = NewTmsKnpInterface();
-        const getCodeInfoResponse = await tmsKnpService.getCodeInfo({ p_code: pCode });
+        const codeService = CodeService();
+        const getCodeInfoResponse = await codeService.getCodeInfo({ p_code: pCode });
         return new Promise((resolve, reject) => {
             if (getCodeInfoResponse?.code === 200) {
                 resolve(getCodeInfoResponse as GetCodeInfoResponse);
@@ -268,9 +270,9 @@ const App = (): JSX.Element => {
         if (isAuthenticated && loginUserInfo) {
             Promise.all([
                 getUserAuth(loginUserInfo.uid),
-                getLayers(),
-                getLayerStyles(),
-                getResourceInfo(),
+                // getLayers(),
+                // getLayerStyles(),
+                //getResourceInfo(),
                 getCodeInfo(CODE_NPK),
                 getCodeInfo(CODE_NPO),
                 getCodeInfo(CODE_ASSET_TYPE),
@@ -279,26 +281,26 @@ const App = (): JSX.Element => {
             ]).then(
                 ([
                     getUserAuthResponse,
-                    getLayersResponse,
-                    getLayerStylesResponse,
-                    getResourceInfoResponse,
+                    //  getLayersResponse,
+                    //  getLayerStylesResponse,
+                    // getResourceInfoResponse,
                     getNpkCodeInfoResponse,
                     getNpoCodeInfoResponse,
                     getAssetTypeCodeInfoResponse,
                     getDisasterCodeInfoResponse,
-                    getSituationCodeInfoResponse,
+                    //  getSituationCodeInfoResponse,
                 ]) => {
                     if (isComponentMounted) {
                         if (
                             getUserAuthResponse &&
-                            getLayersResponse &&
-                            getLayerStylesResponse &&
-                            getResourceInfoResponse &&
+                            //     getLayersResponse &&
+                            //     getLayerStylesResponse &&
+                            //    getResourceInfoResponse &&
                             getNpkCodeInfoResponse &&
                             getNpoCodeInfoResponse &&
                             getAssetTypeCodeInfoResponse &&
-                            getDisasterCodeInfoResponse &&
-                            getSituationCodeInfoResponse
+                            getDisasterCodeInfoResponse
+                            //   getSituationCodeInfoResponse
                         ) {
                             const _userAuth = getUserAuthResponse.response;
                             const _authMenus = filterMenusByRoles(MENUS, _userAuth.user_menu_role);
@@ -310,14 +312,14 @@ const App = (): JSX.Element => {
                             dispatch(
                                 setStoredInitData({
                                     userAuth: _userAuth,
-                                    layers: getLayersResponse.response.results,
-                                    layerStyles: getLayerStylesResponse.response.results,
-                                    resources: getResourceInfoResponse.response.results,
+                                    layers: [],
+                                    layerStyles: [],
+                                    resources: [],
                                     authMenus: _authMenus,
                                     parkOfficeCodes: getNpoCodeInfoResponse.response.results,
                                     assetTypeCodes: getAssetTypeCodeInfoResponse.response.results,
                                     disasterCodes: getDisasterCodeInfoResponse.response.results,
-                                    situationCodes: getSituationCodeInfoResponse.response.results,
+                                    situationCodes: [],
                                     parkCodes: _parkCodes,
                                     authParkCodes: _authParkCodes,
                                 })
@@ -331,9 +333,9 @@ const App = (): JSX.Element => {
         dispatch,
         filterMenusByRoles,
         getCodeInfo,
-        getLayerStyles,
-        getLayers,
-        getResourceInfo,
+        // getLayerStyles,
+        //  getLayers,
+        // getResourceInfo,
         getUserAuth,
         isAuthenticated,
         loginUserInfo,

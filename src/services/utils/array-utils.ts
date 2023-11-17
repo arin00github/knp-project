@@ -10,7 +10,7 @@ export const divideArray = (array: any[]): any[] => {
     }, []);
 };
 
-export const uniqArray = (array: any[]): any[] => {
+export const setUniqArray = (array: any[]): any[] => {
     return Array.from(new Set(array));
 };
 

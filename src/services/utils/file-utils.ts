@@ -48,3 +48,9 @@ export const downloadFile = (response: AxiosResponse): void => {
     link.click();
     link.remove();
 };
+
+export const transDataUrltoFile = (dataURL: string, uniqeUid: string): File => {
+    const binaryData = Buffer.from(dataURL, "base64");
+    const uint8Array = new Uint8Array(binaryData);
+    return new File([uint8Array], `${uniqeUid}_icon`);
+};
