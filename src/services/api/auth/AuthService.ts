@@ -2,10 +2,9 @@ import base64url from "base64url";
 
 import { executeRequest, HTTP_REQUEST_TIMEOUT } from "../HttpService";
 
-import { AuthApi } from "./AuthApi";
-import { CheckLoginResponse } from "./AuthInterface";
+import { AuthApiInterface, CheckLoginResponse } from "./AuthInterface";
 
-export class AuthHttp implements AuthApi {
+export class AuthHttp implements AuthApiInterface {
     private baseUrl = "/auth";
 
     private redirectToLogin() {
@@ -44,3 +43,8 @@ export class AuthHttp implements AuthApi {
         return undefined;
     }
 }
+
+const AuthService = (): AuthApiInterface => {
+    return new AuthHttp();
+};
+export default AuthService;

@@ -131,7 +131,7 @@ const config: Configuration = {
     },
     devServer: {
         static: {
-            directory: path.resolve(__dirname, "build"),
+            directory: path.resolve(__dirname, "public"),
         },
         historyApiFallback: true,
         port: process.env.REACT_APP_PORT,

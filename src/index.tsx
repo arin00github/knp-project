@@ -16,12 +16,13 @@ import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 
 import App from "./app";
-import { worker } from "./mock/browser";
 import * as serviceWorker from "./service-worker";
 import { store, persistor } from "./services/store/index";
 import { history } from "./services/store/index";
 
 if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { worker } = require("./mock/browser");
     worker.start();
 }
 

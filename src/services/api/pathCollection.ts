@@ -11,7 +11,7 @@ export type configureUrlParams = {
  */
 export const configureUrl = ({ testurl, devurl }: configureUrlParams) => {
     if (process.env.NODE_ENV === "development") {
-        return devurl;
+        return testurl;
     } else if (process.env.NODE_ENV === "test") {
         return testurl;
     } else {
@@ -44,8 +44,10 @@ export const LAYER_API_URL = {
 };
 
 export const CODE_API_URL = {
-    getCodeInfo_test: makeTestUrl("/code/get/code-info"),
-    getCodeInfo_dev: "/code/get/code-info",
+    getCodeInfo_test: makeTestUrl(`${TMS_URL}/code/get/code-info`),
+    getCodeInfo_dev: `${TMS_URL}/code/get/code-info`,
+    getCommonCode_test: makeTestUrl(`${TMS_URL}/code/get/code-list`),
+    getCommonCode_dev: `${TMS_URL}/code/get/code-list`,
 };
 
 export const RESOURCE_API_URL = {

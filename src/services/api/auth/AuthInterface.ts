@@ -41,3 +41,8 @@ export interface CheckLoginResult {
 export interface CheckLoginResponse extends AuthResponse {
     response: CheckLoginResult;
 }
+
+export interface AuthApiInterface {
+    checkLogin(): Promise<CheckLoginResponse | undefined>;
+    logout(): Promise<string | undefined>;
+}
